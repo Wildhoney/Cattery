@@ -1,40 +1,45 @@
 (ns cattery.handler
   (:use compojure.core)
-  (:use ring.middleware.json-params)
   (:require [clj-json.core :as json]))
+
+(import 'java.security.MessageDigest
+  'java.math.BigInteger)
 
 (defn json-response [data & [status]]
   {:status (or status 200)
    :headers {"Content-Type" "application/json"}
    :body (json/generate-string data)})
 
-;; capitalise-all :: string -> string
-;(defn capitalise-all [name]
-;  (clojure.string/join
-;    (map clojure.string/capitalize
-;      (clojure.string/split (str name) #"\b"))))
-;
-;;; thousand-times :: int -> int
-;(def thousand-times
-;  (partial * 1000))
-;
-;;; random-coin-value :: _ -> int
-;(def random-coin-value
-;  (partial rand-int 10))
+;; parse-int :: string -> int
+(defn parse-int [s]
+  (when-let [d (re-find #"-?\d+" s)] (Integer. d)))
+
+;; md5 :: -> string -> string
+(defn md5 [s]
+  (let [algorithm (MessageDigest/getInstance "MD5")
+        size (* 2 (.getDigestLength algorithm))
+        raw (.digest algorithm (.getBytes s))
+        sig (.toString (BigInteger. 1 raw) 16)
+        padding (apply str (repeat (- size (count sig)) "0"))]
+    (str padding sig)))
+
+;; mockUrl -> string
+(def mockUrl "http://www.catgifpage.com/gifs/241.gif")
+
+;; defaultCount -> int
+(def defaultCount 10)
 
 (defroutes handler
-;  (GET "/:name" [name]
-;    (let [coins (thousand-times (random-coin-value))]
-;      (json-response {"name" (capitalise-all name),
-;                      "coins_available" coins,
-;                      "is_bankrupt" (zero? coins)})))
+
+  (GET "/:id" [id]
+    (json-response {"id" (md5 mockUrl) "url" mockUrl}))
 
   (GET "/random/:count" [count]
-    (json-response [{"url" "http://www.catgifpage.com/gifs/241.gif"}]))
+    (json-response ["count" (or (parse-int count) defaultCount)
+                    "images" {"id" (md5 mockUrl) "image" mockUrl}]))
 
   (GET "/random" []
-    (json-response {"url" "http://www.catgifpage.com/gifs/241.gif"})))
+    (json-response {"id" (md5 mockUrl)
+                     "image" mockUrl})))
 
-(def app
-  (-> handler
-    wrap-json-params))
+(def app (-> handler wrap-json-params))
