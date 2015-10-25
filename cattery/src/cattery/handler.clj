@@ -26,6 +26,11 @@
 ;; mockUrl -> string
 (def mockUrl "http://www.catgifpage.com/gifs/241.gif")
 
+(def groups [
+    "cats_of_instagram",
+    "catsofinstagram",
+])
+
 ;; defaultCount -> int
 (def defaultCount 10)
 
