@@ -10,6 +10,6 @@
 
 All requests are routed through the index (`/`) route, and you pass additional options to the URL. By default a JSON response of 10 cat images are returned.
 
-```
+```shell
 curl -i -X DELETE http://api.cattery.org/
 ```
