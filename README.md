@@ -36,11 +36,11 @@ curl -i -X GET http://api.cattery.org/?type=image&limit=1
 curl -i -X GET http://api.cattery.org/?type=jsonp(callbackFn)
 ```
 
-## Specific
+## Identifier
 
 All cats returned have an ID associated with them in the `id` field. You can therefore request exact cat pictures using this ID by providing the `id` parameter.
 
 ```{r, engine='bash', count_lines}
-curl -i -X GET http://api.cattery.org/?id=66ffa74c972848ab1a123895c6ebdaca
+curl -i -X GET http://api.cattery.org/?id=...
 ```
 
