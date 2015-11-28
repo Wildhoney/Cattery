@@ -10,7 +10,7 @@
 
 All requests are routed through the index (`/`) route, and you pass additional options to the URL. By default a JSON response of 10 cat images are returned.
 
-```shell
+```{r, engine='bash', count_lines}
 curl -i -X GET http://api.cattery.org/
 ```
 
@@ -18,7 +18,7 @@ curl -i -X GET http://api.cattery.org/
 
 Providing the `limit` parameter will limit the amount of cats returned &mdash; when you specify <kbd>1</kbd> then a non-array will be returned that will contain the one entry.
 
-```shell
+```{r, engine='bash', count_lines}
 curl -i -X GET http://api.cattery.org/?limit=1
 curl -i -X GET http://api.cattery.org/?limit=25
 curl -i -X GET http://api.cattery.org/?limit=100
@@ -30,7 +30,7 @@ curl -i -X GET http://api.cattery.org/?limit=100
 
 By supplying the `type` parameter you can specify how the data is returned. By default the `json` parameter is used &ndash; however you can return `xml`, `jsonp` (with a function to invoke) and `image` (which will automatically limit to <kbd>1</kbd>).
 
-```shell
+```{r, engine='bash', count_lines}
 curl -i -X GET http://api.cattery.org/?type=xml
 curl -i -X GET http://api.cattery.org/?type=image&limit=1
 curl -i -X GET http://api.cattery.org/?type=jsonp(callbackFn)
@@ -40,7 +40,7 @@ curl -i -X GET http://api.cattery.org/?type=jsonp(callbackFn)
 
 All cats returned have an ID associated with them in the `id` field. You can therefore request exact cat pictures using this ID by providing the `id` parameter.
 
-```shell
+```{r, engine='bash', count_lines}
 curl -i -X GET http://api.cattery.org/?id=66ffa74c972848ab1a123895c6ebdaca
 ```
 
