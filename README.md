@@ -2,7 +2,8 @@
 
 > Web-based API that delivers cats straight to your browser via JSON and YAML.
 
-![Cat Collage](http://farm6.static.flickr.com/5201/5199108732_95fca5bfc7.jpg)
+<img alt="Cat Collage" src="http://farm6.static.flickr.com/5201/5199108732_95fca5bfc7.jpg" width="150" />
+
 <sub>Image courtesy of [Marcos Arruda](http://www.flickriver.com/photos/marcosarruda/5199108732/)</sub>
 
 ## Getting Started
