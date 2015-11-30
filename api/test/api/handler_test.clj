@@ -1,7 +1,7 @@
-(ns cattery.handler-test
+(ns api.handler-test
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
-            [cattery.handler :refer :all]))
+            [api.handler :refer :all]))
 
 (deftest test-app
   (testing "main route"
